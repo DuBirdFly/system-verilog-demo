@@ -6,6 +6,21 @@ module top;
     import uvm_pkg::*;
     import test_pkg::*;
 
+    initial begin
+        `ifdef DUMP_VCD
+            $display("Dumping VCD waveforms");
+            $dumpfile("output/wave/out.vcd");
+            $dumpvars(0);
+        `endif
+
+        `ifdef DUMP_FSDB
+            $display("Dumping FSDB waveforms");
+            $fsdbAutoSwitchDumpfile(1024, "output/wave/novas.fsdb", 2);    // 1024 MB
+            $fsdbDumpvars(0, top, "+mda");
+            // $fsdbDumpvarsToFile("dump_information.list");
+        `endif
+    end
+
     logic pclk;
     logic presetn;
 
@@ -42,22 +57,6 @@ module top;
         uvm_config_db#(virtual apb_interface)::set(null, "uvm_test_top", "apb", apb_if);
         uvm_config_db#(virtual axi_interface)::set(null, "uvm_test_top", "axi", axi_if);
         run_test();
-    end
-
-    initial begin
-        `ifdef DUMP_VCD
-            $display("Dumping VCD waveforms");
-            $dumpfile("out.vcd");
-            $dumpvars(0);
-        `endif
-
-        `ifdef DUMP_FSDB
-            $display("Dumping FSDB waveforms");
-            $fsdbAutoSwitchDumpfile(1024, "wave/novas.fsdb", 2);    // 1024 MB
-            $fsdbDumpvars(0, top, "+mda");
-            // $fsdbDumpvarsToFile("dump_information.list");
-        `endif
-
     end
 
 endmodule
