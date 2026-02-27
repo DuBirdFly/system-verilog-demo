@@ -1,3 +1,4 @@
+TB_TOP ?= top
 TESTNAME ?= TestBase
 
 RUN_DIR = run_case.$(TESTNAME)
@@ -21,13 +22,17 @@ base:
 # VCS  = vcs -full64 -LDFLAGS -Wl,--no-as-needed
 VCS  = vcs -full64
 VCS += -file ./base/option/compile_base.f
+VCS += -file ./base/option/compile_define.f
+VCS += -file ./base/option/compile_uvm.f
 VCS += -file ./base/option/compile_filelist.f
+VCS += +optconfigfile+./base/option/vcs.cfg
 VCS += -l ./log/vcs.log
 VCS += -o ./output/simv
 VCS += -Mdir=./output/csrc
+VCS += -top $(TB_TOP)
 
 vcs:
-	cd $(RUN_DIR) && $(VCS) +define+DUMP_FSDB
+	cd $(RUN_DIR) && $(VCS)
 
 ######################################################
 SIMV  = ./output/simv +UVM_TESTNAME=$(TESTNAME)

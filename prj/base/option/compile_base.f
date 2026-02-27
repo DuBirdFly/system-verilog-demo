@@ -1,17 +1,15 @@
-// ===========================================================================
-// * Compile-Time or Run-Time Options
-// ===========================================================================
 -q                  // 安静模式
 +v2k                // 支持 Verilog-2001 语法
 -sverilog           // 支持 SystemVerilog
 -debug_access+all   // 支持调试 (all: 写(+w), 读(+r), force(+f), ucli单步调试(+l), 网表操作(+n) ......)
 -kdb                // 生成 verdi 需要的 database
 -timescale=1ns/1ps  // 设置初始的默认仿真时间单位
+-Mupdate            // 增量编译
+
+
+// -top top            // 指定顶层模块
 // -notice             // 更详细的 log 信息
 // -diag timescale     // 打印 module timescale 以及其来源
--Mupdate            // 增量编译
--top top            // 指定顶层模块
-
 // -j8                 // 多线程并行编译 (8指的是8个线程)
 // +vcs+fsdbon         // 编译时替代 $fsdbDumpvars 选项
 // -R                  // 编译完成后直接运行可执行文件 (如 simv)
@@ -21,22 +19,13 @@
 // +vpi                // 允许使用 VPI PLI 访问
 // +plusarg_save       // 允许在编译期就记录 plusarg
 // +vcs+flush+all      // 更快的 log, vcd, fopen 的 flush 速度
-
-// ===========================================================================
-// * UVM Options
-// ===========================================================================
-// +incdir+${VCS_HOME}/etc/uvm-1.2
-// ${VCS_HOME}/etc/uvm-1.2/uvm.sv
-// ${VCS_HOME}/etc/uvm-1.2/dpi/uvm_dpi.cc
-// -CFLAGS -DVCS
-
-// -ntb_opts uvm-1.1
-// -ntb_opts uvm-1.2
--ntb_opts uvm-ieee-2020-2.0
-
-// +define+UVM_OBJECTION_TRACE     // 打印 UVM objection trace (raise/drop) 信息
-
-// ===========================================================================
-// * Other Options
-// ===========================================================================
 // -simprofile         // 生成 profile 文件
+
+// ========================================================
+// No Warn Options
+// +warn=noCDNYI
+// +warn=noIPDW
+// +warn=noILLGO
+// +warn=noTMR
+// +warn=noPHNE
+// +warn=noIRIID-W
