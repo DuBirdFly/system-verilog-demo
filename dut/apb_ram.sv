@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module apb_ram #(
     parameter   PADDR_WIDTH = 16,
     localparam  PDATA_WIDTH = 32,

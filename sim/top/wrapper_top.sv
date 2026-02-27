@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 
 module wrapper_top (
-    apb_interface apb,
-    axi_interface axi
+    interface apb,      // or apb_interface apb
+    interface axi       // or axi_interface axi
 );
 
     apb_ram #(
