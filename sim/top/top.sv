@@ -7,17 +7,25 @@ module top;
     import test_pkg::*;
 
     initial begin
+        // note: 不应该使用 plusargs，因为不同 EDA 的系统函数不一样
+        // note: 不应把 dump_wave 放在 uvm_test 里，否则很难访问到模块名
+        // note：还有一种做法是用 ucli.key，但是这样访问具体信号比较麻烦，需要权衡
+        // note：vip example 是放在 tb_top 里的，这里沿用 vip 的做法
         `ifdef DUMP_VCD
+            $display("===============================================");
             $display("Dumping VCD waveforms");
-            $dumpfile("output/wave/out.vcd");
+            $dumpfile(VCS_FILENAME);
             $dumpvars(0);
+            $display("===============================================");
         `endif
 
         `ifdef DUMP_FSDB
+            $display("===============================================");
             $display("Dumping FSDB waveforms");
-            $fsdbAutoSwitchDumpfile(1024, "output/wave/novas.fsdb", 2);    // 1024 MB
+            $fsdbAutoSwitchDumpfile(FSDB_LIMIT_SIZE, FSDB_FILENAME, FSDB_FILE_AMOUNT);
             $fsdbDumpvars(0, top, "+mda");
             // $fsdbDumpvarsToFile("dump_information.list");
+            $display("===============================================");
         `endif
     end
 

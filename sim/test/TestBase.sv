@@ -5,6 +5,9 @@ class TestBase extends uvm_test;
     virtual apb_interface vif_apb;
     virtual axi_interface vif_axi;
 
+    // ApbEnv apbEnv;
+    // ApbSeq apbSeq;
+
     extern         function      new(string name = "testBase", uvm_component parent);
 
     extern virtual function void build_phase(uvm_phase phase);
@@ -25,6 +28,9 @@ function void TestBase::build_phase(uvm_phase phase);
 
     if (!uvm_config_db#(virtual axi_interface)::get(this, "", "axi", vif_axi))
         `uvm_fatal("NOVIF", "No Interface Specified")
+
+    // apbEnv = ApbEnv::type_id::create("apbEnv", this);
+    // apbSeq = ApbSeq::type_id::create("apbSeq", this);
 
 endfunction
 
