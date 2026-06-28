@@ -1,5 +1,3 @@
--f rtl.f
-
 // Simulation options
 +define+DUMP_FSDB
 

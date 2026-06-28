@@ -1,10 +1,9 @@
 {
     "ctags-companion.command": "ctags -R --fields=+nKz --langmap=SystemVerilog:+.v -R rtl /opt/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/src",
 
-
     "verilog.project.enabled": true,
     "verilog.project.filelists": [
-        "filelists/sim.f"
+        "filelists/all.f"
     ],
     "verilog.project.topModules": [
         "tb_top"
@@ -22,10 +21,5 @@
     "verilog.semanticDiagnostics.unknownPorts.enabled": true,
     "verilog.semanticDiagnostics.unknownParameters.enabled": true,
     "verilog.semanticDiagnostics.unresolvedIncludes.enabled": true,
-    "verilog.semanticDiagnostics.unresolvedMacros.enabled": false,
-    "verilog.preprocessor.useProjectDefines": true,
-    "verilog.preprocessor.inactiveCode.enabled": true,
-    "verilog.preprocessor.inactiveCode.opacity": 0.45,
-    "verilog.preprocessor.inactiveCode.foregroundColor": "",
-    "verilog.preprocessor.inactiveCode.backgroundColor": ""
+    "verilog.semanticDiagnostics.unresolvedMacros.enabled": false
 }
