@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 interface axi_interface (
     input logic aclk,
     input logic aresetn

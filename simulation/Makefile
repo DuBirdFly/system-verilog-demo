@@ -1,4 +1,4 @@
-TB_TOP ?= top
+TB_TOP ?= tb_top
 TESTNAME ?= TestBase
 
 RUN_DIR = run_case.$(TESTNAME)
@@ -8,12 +8,14 @@ RUN_DIR = run_case.$(TESTNAME)
 ######################################################
 base:
 	mkdir -p $(RUN_DIR)
-	mkdir -p $(RUN_DIR)/log
-	mkdir -p $(RUN_DIR)/output
-	mkdir -p $(RUN_DIR)/output/wave
+	mkdir -p $(RUN_DIR)/prj
+	mkdir -p $(RUN_DIR)/prj/log
+	mkdir -p $(RUN_DIR)/prj/output
+	mkdir -p $(RUN_DIR)/prj/output/wave
 	cd $(RUN_DIR) && ln -sf ../base
-	cd $(RUN_DIR) && ln -sf ../../dut
-	cd $(RUN_DIR) && ln -sf ../../sim
+	cd $(RUN_DIR) && ln -sf ../../rtl
+	cd $(RUN_DIR) && ln -sf ../../testbench
+	cd $(RUN_DIR) && ln -sf ../../filelists
 
 ######################################################
 # note: 指定 -o 包括了 simv 和 simv.daidir
@@ -21,18 +23,17 @@ base:
 
 # VCS  = vcs -full64 -LDFLAGS -Wl,--no-as-needed
 VCS  = vcs -full64
-VCS += -file ./base/option/compile_base.f
-VCS += -file ./base/option/compile_define.f
-VCS += -file ./base/option/compile_uvm.f
-VCS += -file ./base/option/compile_filelist.f
-VCS += +optconfigfile+./base/option/vcs.cfg
+VCS += -file ../base/option/compile_base.f
+VCS += -file ../base/option/compile_uvm.f
+VCS += -file ../filelists/sim.f
+VCS += +optconfigfile+../base/option/vcs.cfg
 VCS += -l ./log/vcs.log
 VCS += -o ./output/simv
 VCS += -Mdir=./output/csrc
 VCS += -top $(TB_TOP)
 
-vcs:
-	cd $(RUN_DIR) && $(VCS)
+vcs: base
+	cd $(RUN_DIR)/prj && $(VCS)
 
 ######################################################
 SIMV  = ./output/simv +UVM_TESTNAME=$(TESTNAME)
@@ -40,18 +41,15 @@ SIMV += -f ./base/option/simulate_base.f
 SIMV += -l ./log/simv.log
 SIMV += -k ./output/ucli.key
 
-simv:
-	cd $(RUN_DIR) && $(SIMV) && rm -rf novas_dump.log
+simv: vcs
+	cd $(RUN_DIR)/prj && $(SIMV) && rm -rf novas_dump.log
 
 ######################################################
 clean:
-	cd $(RUN_DIR) && find . -maxdepth 1 -type l -delete
+	cd $(RUN_DIR)/prj && find . -maxdepth 1 -type l -delete
 
 ######################################################
-all:
-	$(MAKE) base
-	$(MAKE) vcs
-	$(MAKE) simv
+all: simv
 	$(MAKE) clean
 
 ######################################################
@@ -63,4 +61,4 @@ VERDI += -rcFile ../base/novas/novas.rc
 VERDI += -guiConf ../base/novas/novas.conf
 
 verdi:
-	cd $(RUN_DIR) && $(VERDI) &
+	cd $(RUN_DIR)/prj && $(VERDI) &

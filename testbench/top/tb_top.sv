@@ -1,7 +1,10 @@
+// `include "uvm_macros.svh"
+// import uvm_pkg::*;
+
 `timescale 1ns/1ps
 
 `default_nettype none
-module top;
+module tb_top;
 
     import uvm_pkg::*;
     import test_pkg::*;
@@ -14,7 +17,7 @@ module top;
         `ifdef DUMP_VCD
             $display("===============================================");
             $display("Dumping VCD waveforms");
-            $dumpfile(VCS_FILENAME);
+            $dumpfile(test_pkg::VCS_FILENAME);
             $dumpvars(0);
             $display("===============================================");
         `endif
@@ -22,8 +25,8 @@ module top;
         `ifdef DUMP_FSDB
             $display("===============================================");
             $display("Dumping FSDB waveforms");
-            $fsdbAutoSwitchDumpfile(FSDB_LIMIT_SIZE, FSDB_FILENAME, FSDB_FILE_AMOUNT);
-            $fsdbDumpvars(0, top, "+mda");
+            $fsdbAutoSwitchDumpfile(test_pkg::FSDB_LIMIT_SIZE, test_pkg::FSDB_FILENAME, test_pkg::FSDB_FILE_AMOUNT);
+            $fsdbDumpvars(0, tb_top, "+mda");
             // $fsdbDumpvarsToFile("dump_information.list");
             $display("===============================================");
         `endif

@@ -1,0 +1,31 @@
+{
+    "ctags-companion.command": "ctags -R --fields=+nKz --langmap=SystemVerilog:+.v -R rtl /opt/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/src",
+
+
+    "verilog.project.enabled": true,
+    "verilog.project.filelists": [
+        "filelists/sim.f"
+    ],
+    "verilog.project.topModules": [
+        "tb_top"
+    ],
+    // 该项由 "Run Verilog: Select Active HDL Target" 命令生成
+    "verilog.project.activeTarget": "filelist:0:sim.f",
+
+    "verilog.hdlExplorer.enabled": true,
+    "verilog.hierarchy.enabled": true,
+    "verilog.hierarchy.showUnresolved": true,
+
+    // semantic diagnostics: 语义诊断
+    "verilog.semanticDiagnostics.enabled": true,
+    "verilog.semanticDiagnostics.unresolvedModules.enabled": true,
+    "verilog.semanticDiagnostics.unknownPorts.enabled": true,
+    "verilog.semanticDiagnostics.unknownParameters.enabled": true,
+    "verilog.semanticDiagnostics.unresolvedIncludes.enabled": true,
+    "verilog.semanticDiagnostics.unresolvedMacros.enabled": false,
+    "verilog.preprocessor.useProjectDefines": true,
+    "verilog.preprocessor.inactiveCode.enabled": true,
+    "verilog.preprocessor.inactiveCode.opacity": 0.45,
+    "verilog.preprocessor.inactiveCode.foregroundColor": "",
+    "verilog.preprocessor.inactiveCode.backgroundColor": ""
+}

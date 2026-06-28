@@ -4,8 +4,6 @@
  * Supports FIXED and INCR burst types as well as narrow bursts.
  */
 
-`timescale 1ns / 1ps
-
 module axi_ram #
 (
     // Width of data bus in bits

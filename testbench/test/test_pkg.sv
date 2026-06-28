@@ -7,6 +7,4 @@ package test_pkg;
     parameter FSDB_LIMIT_SIZE = 1024;    // 1024 MB
     parameter FSDB_FILE_AMOUNT = 4;
 
-    `include "test/TestBase.sv"
-
 endpackage

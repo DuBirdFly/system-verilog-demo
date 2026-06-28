@@ -1,5 +1,3 @@
-`timescale 1ns/1ps
-
 module clk_rst_gen #(
     parameter APB_FREQ = 50, // 50MHz
     parameter AXI_FREQ = 100 // 100MHz
@@ -10,6 +8,8 @@ module clk_rst_gen #(
     output logic aclk,
     output logic aresetn
 );
+
+    timeunit 1ns/1ps;
 
     localparam PERIOD_APB = 1_000 / APB_FREQ;
     localparam PERIOD_AXI = 1_000 / AXI_FREQ;

@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 interface apb_interface #(
     parameter int ADDR_WIDTH = apb_pkg::APB_ADDR_WIDTH,
     parameter int DATA_WIDTH = apb_pkg::APB_DATA_WIDTH
