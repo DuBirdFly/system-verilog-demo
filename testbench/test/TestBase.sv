@@ -1,5 +1,3 @@
-import uvm_pkg::*;
-
 class TestBase extends uvm_test;
 
     `uvm_component_utils(TestBase)

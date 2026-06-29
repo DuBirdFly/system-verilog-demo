@@ -1,8 +1,11 @@
 // Simulation options
 +define+DUMP_FSDB
 
-// UVM files
+// utility files
 ../testbench/utils/utils.sv
+
+// UVM files
+../testbench/test/uvm_header.sv
 
 ../testbench/apb/apb_pkg.sv
 ../testbench/apb/apb_interface.sv

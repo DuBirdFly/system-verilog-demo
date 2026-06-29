@@ -2,10 +2,11 @@
 // ===========================================================================
 // * UVM Options
 // ===========================================================================
+// 手工编译 UVM, 这段 option 可见 IEEE-UVM-1.2 工程的的 examples/Makefile.vcs
+// +acc +vpi
 // +incdir+${VCS_HOME}/etc/uvm-1.2
 // ${VCS_HOME}/etc/uvm-1.2/uvm.sv
-// ${VCS_HOME}/etc/uvm-1.2/dpi/uvm_dpi.cc
-// -CFLAGS -DVCS
+// ${VCS_HOME}/etc/uvm-1.2/dpi/uvm_dpi.cc -CFLAGS -DVCS
 
 // -ntb_opts uvm-1.1
 // -ntb_opts uvm-1.2

@@ -39,7 +39,7 @@ vcs: base
 
 ######################################################
 SIMV  = ./output/simv +UVM_TESTNAME=$(TESTNAME)
-SIMV += -f ./base/option/simulate_base.f
+SIMV += -f ../base/option/simulate_base.f
 SIMV += -l ./log/simv.log
 SIMV += -k ./output/ucli.key
 
