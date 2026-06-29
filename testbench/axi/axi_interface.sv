@@ -3,6 +3,8 @@ interface axi_interface (
     input logic aresetn
 );
 
+    timeunit 1ns/1ps;
+
     logic [axi_pkg::AXI_ID_WIDTH-1:0]       awid;
     logic [axi_pkg::AXI_ADDR_WIDTH-1:0]     awaddr;
     logic [axi_pkg::AXI_LEN_WIDTH-1:0]      awlen;

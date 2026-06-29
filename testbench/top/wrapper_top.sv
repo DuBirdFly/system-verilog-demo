@@ -1,9 +1,9 @@
-`timescale 1ns/1ps
-
 module wrapper_top (
     interface apb,      // or apb_interface apb
     interface axi       // or axi_interface axi
 );
+
+    timeunit 1ns/1ps;
 
     apb_ram #(
         .PADDR_WIDTH    ( 8             )

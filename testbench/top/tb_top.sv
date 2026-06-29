@@ -1,10 +1,7 @@
-// `include "uvm_macros.svh"
-// import uvm_pkg::*;
-
-`timescale 1ns/1ps
-
 `default_nettype none
 module tb_top;
+
+    timeunit 1ns/1ps;
 
     import uvm_pkg::*;
     import test_pkg::*;

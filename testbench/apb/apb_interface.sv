@@ -6,6 +6,8 @@ interface apb_interface #(
     input logic presetn
 );
 
+    timeunit 1ns/1ps;
+
     logic                       psel;
     logic                       penable;
     logic                       pwrite;
