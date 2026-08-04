@@ -1,39 +1,10 @@
 {
-    
-    "verilog.ctags.path": "/usr/bin/ctags",
     "ctags-companion.command": "ctags -R --fields=+nKz --langmap=SystemVerilog:+.v -R rtl /opt/synopsys/vcs/W-2024.09-SP1/etc/uvm-ieee-2020/src",
 
-    "verilog.project.enabled": true,
-    "verilog.project.filelists": [
-        "filelists/rtl.f",
-        "filelists/sim.f",      // slang 不支持 UVM
-        "filelists/all.f"       // slang 不支持 UVM
+    "verilog.preprocessor.inactiveCode.enabled": true,
+    "verilog.preprocessor.defines": [
+        "DUMP_FSDB"
     ],
-    "verilog.project.topModules": [
-        "wrapper_top"
-    ],
-    // 该项由 "Run Verilog: Select Active HDL Target" 命令生成
-    "verilog.project.activeTarget": "filelist:2:all.f",
-
-    "verilog.hdlExplorer.enabled": true,
-    "verilog.hierarchy.enabled": true,
-    "verilog.hierarchy.showUnresolved": true,
-
-    // semantic diagnostics: 语义诊断
-    "verilog.semanticDiagnostics.enabled": true,
-    "verilog.semanticDiagnostics.unresolvedModules.enabled": true,
-    "verilog.semanticDiagnostics.unknownPorts.enabled": true,
-    "verilog.semanticDiagnostics.unknownParameters.enabled": true,
-    "verilog.semanticDiagnostics.unresolvedIncludes.enabled": true,
-    "verilog.semanticDiagnostics.unresolvedMacros.enabled": false,
-
-    "verilog.linting.linter": "none",       // 所有 Lint 工具对所有 UVM 的支持都不好
-    // "verilog.linting.mode": "compileUnit",
-    "verilog.linting.mode": "compileUnit",
-    "verilog.linting.useProjectContext": true,
-    "verilog.linting.path": "/home/dubird/.local/bin",
-
-    "verilog.linting.slang.runAtFileLocation": false,
-    "verilog.linting.slang.useWSL": true,
-    "verilog.linting.slang.arguments": "--std latest --single-unit"
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda"
 }

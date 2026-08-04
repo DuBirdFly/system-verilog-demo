@@ -56,7 +56,7 @@ def resolve_f_file(f_path: str, base_dir: str, visited: set, lines_out: list, lo
             line = raw_line.strip()
 
             # 跳过空行和注释行 (// 和 #)
-            if not line or line.startswith("//") or line.startswith("#"):
+            if not line or line.startswith(("//", "#")):
                 continue
 
             # 去除行内注释 (// 之后的部分)
@@ -118,11 +118,9 @@ def main():
         f.write("// ================================================\n")
         f.write(f"// 合并自顶层文件: {args.top}\n")
         f.write(f"// 包含以下 .f 文件:\n")
-        for v in sorted(visited):
-            f.write(f"//   {v}\n")
+        f.writelines(f"//   {v}\n" for v in sorted(visited))
         f.write("// ================================================\n\n")
-        for line in lines_out:
-            f.write(line + "\n")
+        f.writelines(line + "\n" for line in lines_out)
 
     # 写入日志文件
     if args.log:
@@ -134,8 +132,7 @@ def main():
             f.write(f"总行数: {len(lines_out)}\n")
             f.write(f"来源文件数: {len(visited)}\n")
             f.write(f"{'=' * 50}\n\n")
-            for line in log_lines:
-                f.write(line + "\n")
+            f.writelines(line + "\n" for line in log_lines)
 
     summary = f"合并完成! 输出文件: {output_path}, 共 {len(lines_out)} 行, 来自 {len(visited)} 个 *.f 文件"
     print(f"\n{summary}")
