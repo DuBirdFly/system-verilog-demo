@@ -1,10 +1,6 @@
 package utils;
 
-    /*
-     * 返回带颜色的字符串
-     */
-
-    function string color_msg(
+    function automatic string color_msg(
         // attribute: 0: Normal, 1: Bold, 2: Dim, 3: Italic, 4: Underline, 5: Blink, 7: Reverse, 8: Hidden
         int attr,
         // foreground: 30: Black, 31: Red, 32: Green, 33: Yellow, 34: Blue, 35: Magenta, 36: Cyan, 37: White, 38/39: Default
@@ -16,35 +12,45 @@ package utils;
         return $sformatf("\033[%0d;%0d;%0dm%s\033[0m", attr, fg, bg, msg);
     endfunction
 
-    /*
-     * 把 src_data 的 offset 位开始的 width 位设置为 value
-     * 注: 相当于 src_data[offset + width - 1 : offset] = value
-     * 注: 不能直接写 src_data[offset +: width] = value, 因为 sv 不支持变宽的 +: 语法
-     */
-    function automatic logic [31:0] set_bit(
-        logic [31:0] src_data, int offset, int width, logic [31:0] value
+    function automatic logic [31:0] get_bit_field (
+        input logic [31:0] data,
+        input int offset,
+        input int width
     );
-        logic [31:0] dst_data = src_data;
+        logic [31:0] mask;
 
-        if (offset < 0 || offset >= 32) begin
-            $error("offset %0d out of range [0, 31]", offset);
-            $finish;
+        if (offset < 0 || offset > 31 || width < 1 || width > 32 || (offset + width) > 32) begin
+            $fatal(1, "[FATAL] get_bit_field: 非法参数: offset=%0d, width=%0d", offset, width);
         end
 
-        if (width < 1 || width > 32) begin
-            $error("width %0d out of range [1, 32]", width);
-            $finish;
-        end
+        mask = (32'hFFFFFFFF >> (32 - width)) << offset;
+        return (data & mask) >> offset;
 
-        if (offset + width > 32) begin
-            $error("offset %0d + width %0d out of range [0, 31]", offset, width);
-            $finish;
-        end
-
-        for (int i = 0; i < width; i++) begin
-            dst_data[offset + i - 1] = value[i];
-        end
-
-        return dst_data;
     endfunction
+
+    function automatic logic [31:0] set_bit_field (
+        input logic [31:0] data,
+        input int offset,
+        input int width,
+        input logic [31:0] value
+    );
+        logic [31:0] mask;
+
+        if (offset < 0 || offset > 31 || width < 1 || width > 32 || (offset + width) > 32) begin
+            $fatal(1, "[FATAL] set_bit_field: 非法参数: offset=%0d, width=%0d", offset, width);
+        end
+
+        // value 超出字段宽度 (width) 时，多余高位会被截断，给出 warning 但不 stop
+        if (width < 32 && (value >> width) != 0) begin
+            $warning(
+                "[WARN] set_bit_field: value=0x%h 超出字段宽度 (width=%0d, offset=%0d), 多余高位将被截断",
+                value, width, offset
+            );
+        end
+
+        mask = (32'hFFFFFFFF >> (32 - width)) << offset;
+        return (data & ~mask) | ((value << offset) & mask);
+    
+    endfunction
+
 endpackage

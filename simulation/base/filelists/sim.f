@@ -15,6 +15,7 @@
 
 ./testbench/test/test_pkg.sv
 ./testbench/test/TestBase.sv
+./testbench/test/Testcase_Utils.sv
 
 // Testbench top files
 ./testbench/top/clk_rst_gen.sv
